@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Chat, ChatProps } from './Chat';
 import * as konsole from './Konsole';
+import { SuperChat } from './SuperChat';
 
 export type AppProps = ChatProps;
 
@@ -12,5 +13,5 @@ export const App = (props: AppProps, container: HTMLElement) => {
 
 const AppContainer = (props: AppProps) =>
     <div className="wc-app">
-        <Chat { ...props } />
+        <SuperChat { ...props } />
     </div>;
