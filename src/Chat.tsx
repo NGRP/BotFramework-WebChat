@@ -6,13 +6,16 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
 import { Activity, IBotConnection, User, DirectLine, DirectLineOptions, CardActionTypes } from 'botframework-directlinejs';
-import { createStore, ChatActions, sendMessage } from './Store';
+import { createStore, ChatActions, sendMessage, ChatState } from './Store';
 import { Provider } from 'react-redux';
+import { Store } from 'redux';
 import { SpeechOptions } from './SpeechOptions';
 import { Speech } from './SpeechModule';
 import { ActivityOrID, FormatOptions } from './Types';
 import * as konsole from './Konsole';
 import { getTabIndex } from './getTabIndex';
+
+import { IMessage } from './SuperChat';
 
 export interface ChatProps {
     adaptiveCardsHostConfig: any,
@@ -27,7 +30,8 @@ export interface ChatProps {
     sendTyping?: boolean,
     showUploadButton?: boolean,
     formatOptions?: FormatOptions,
-    resize?: 'none' | 'window' | 'detect'
+    resize?: 'none' | 'window' | 'detect',
+    messages: IMessage[]
 }
 
 import { History } from './History';
@@ -36,7 +40,7 @@ import { Shell, ShellFunctions } from './Shell';
 
 export class Chat extends React.Component<ChatProps, {}> {
 
-    private store = createStore();
+    protected store = createStore();
 
     private botConnection: IBotConnection;
 
